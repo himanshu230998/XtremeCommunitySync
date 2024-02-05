@@ -1,13 +1,14 @@
 name: DEV Deploy
 
 env:
-  JSON: ${{ toJSON(github) }}
+  value: xyzqwerty
+  # JSON: ${{ toJSON(github) }}
+
 on:
   workflow_dispatch:
   push:
     branches: 
       - '**'
-      - '!main'
 
 jobs:
 
@@ -26,5 +27,13 @@ jobs:
         run: |
           echo dev branch name ${{ github.event.ref }}
           echo github "${{ env.JSON }}" || true
+          value="xyzqwerty"
 
-          
+  docker01:
+    name: "check variable exists"
+    if: contains('${{ env.value }}', 'xyz')
+    runs-on: ubuntu-22.04
+    steps:
+      - name: haaaaaaha
+        run: |
+          echo done
